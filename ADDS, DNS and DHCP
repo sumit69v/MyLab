@@ -1,0 +1,72 @@
+## Setup Active Directory Domain Services (ADDS)
+- Centralized user and computer authentication
+- Group policy management
+- DNS integration
+
+Steps
+1. Set hostname and IP address
+
+IP address 10.1.1.2
+subnet mask 255.255.255.0
+Default gateway 10.1.1.1
+
+Preferred DNS server 127.0.0.1
+
+2. Add the ADDS and DNS Roles
+- Select Role based or featured based installation
+- choose your local server
+- check ADDS and DNS
+- add optional features - Group policy management
+- next through the wizard and install
+- complete install
+
+3. Promote to Domain controller
+- On notification of server manager, check "configuration required. Installation succeeded"
+- click Promote this server to a domain controller.
+- choose
+	- Add a new forest
+	- Root domain name - dc.school.com
+- Next, configure
+	- Forest and domain functional level : windows server 2025
+	- Set DSRM password
+- Leave DNS deligation unchecked
+- accept default netbios name and database paths
+- Run the prerequisite check. once passed, click install
+- Note: server will reboot automatically after permotion.
+
+4. Verify domain services
+After reboot
+- Open server manager > Tools
+- Lunch
+		- Active directory users and computers
+		- DNS manager
+
+5. Configure DNS Forwarders [To resolve external domains]
+- open DNS manager
+- Right click server > Properties > Forwarders
+- Add
+	- 1.1.1.1 (default)
+	- 1.0.0.1
+Test name resolution with nslookup
+- nslookup dc.school.com
+- nslookup school.com
+
+6. Install DHCP server
+- open add roles and features wizard
+- role based installation
+- select your server
+- select DHCP as server roles
+- Install
+
+7. Configure DHCP server
+- Right click IPv4 > New Scope
+- Provide name of scope - Endpoints
+- Provide start IP and End IP 
+- Check subnet mask
+- Leave exclution IP if no any ip to exclution
+- check lease duration
+- check "Yes, I want to configure these options now"
+- Finish
+
+
+
