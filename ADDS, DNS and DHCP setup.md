@@ -51,6 +51,8 @@ Test name resolution with nslookup
 - nslookup dc.school.com
 - nslookup school.com
 
+  * do not forgot to uncheck the ipv6 and add the dns ip as 127.0.0.1 on domain if it is a primary domain.
+
 6. Install DHCP server
 - open add roles and features wizard
 - role based installation
